@@ -1,0 +1,6 @@
+activating 
+venv\Scripts\activate
+
+run 
+py app.py or python app.py
+
