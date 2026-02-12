@@ -605,6 +605,157 @@
                 justify-content: center;
             }
         }
+/* ============================= */
+/* Alzheimer's Information Page  */
+/* ============================= */
+
+.ad-info {
+    width: 100%;
+    padding: 80px 0;
+    background: var(--light-gray);
+}
+
+
+/* Layout */
+.ad-container {
+    display: flex;
+    width: 100%;
+}
+
+/* ================= Sidebar ================= */
+
+.ad-sidebar {
+    width: 260px;
+    min-height: 100vh;
+    position: sticky;
+    top: 100px;
+    background: var(--white);
+    padding: 35px 25px;
+    box-shadow: 5px 0 25px rgba(0,0,0,0.05);
+}
+
+.ad-sidebar h3 {
+    margin-bottom: 30px;
+    font-size: 22px;
+    color: var(--dark-blue);
+}
+
+.ad-sidebar button {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 18px;
+    border: none;
+    background: var(--light-blue);
+    border-radius: 10px;
+    text-align: left;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-size: 15px;
+}
+
+.ad-sidebar button i {
+    margin-right: 10px;
+}
+
+.ad-sidebar button:hover,
+.ad-sidebar button.active-btn {
+    background: var(--primary-blue);
+    color: #fff;
+}
+
+/* ================= Content ================= */
+
+.ad-content {
+    flex: 1;
+    padding: 70px;
+    background: var(--white);
+}
+
+.ad-section {
+    display: none;
+}
+
+.ad-section.active {
+    display: block;
+}
+
+.ad-section h2 {
+    font-size: 32px;
+    margin-bottom: 40px;
+    color: var(--dark-blue);
+}
+
+/* ================= Card Grid (Sir Structure) ================= */
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /* 2x2 layout */
+    gap: 50px;
+}
+
+/* Card Design */
+.info-card {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 25px 50px rgba(0,0,0,0.12);
+}
+
+/* Image */
+.info-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+/* Heading */
+.info-card h4 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: var(--primary-blue);
+}
+
+/* Description */
+.info-card p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #555;
+}
+
+/* ================= Responsive ================= */
+
+@media (max-width: 1100px) {
+
+    .card-grid {
+        grid-template-columns: 1fr;  /* Single column on smaller screens */
+    }
+
+    .ad-container {
+        flex-direction: column;
+    }
+
+    .ad-sidebar {
+        width: 100%;
+        min-height: auto;
+        position: relative;
+        top: 0;
+        box-shadow: none;
+    }
+
+    .ad-content {
+        padding: 40px;
+    }
+}
+
 
         @media (max-width: 576px) {
             section {
@@ -660,6 +811,205 @@
         </div>
     </header>
 
+<!-- Alzheimer's Information Sidebar Section -->
+<section class="ad-info">
+    <div class="ad-container">
+
+        <!-- Sidebar -->
+        <div class="ad-sidebar">
+            <h3>Alzheimer's Info</h3>
+
+            <button onclick="showADSection(event,'symptoms')" class="active-btn">
+                <i class="fas fa-brain"></i> Symptoms
+            </button>
+
+            <button onclick="showADSection(event,'stages')">
+                <i class="fas fa-layer-group"></i> Stages
+            </button>
+
+            <button onclick="showADSection(event,'causes')">
+                <i class="fas fa-dna"></i> Causes
+            </button>
+
+            <button onclick="showADSection(event,'diagnosis')">
+                <i class="fas fa-stethoscope"></i> Diagnosis
+            </button>
+
+            <button onclick="showADSection(event,'prevention')">
+                <i class="fas fa-heartbeat"></i> Prevention
+            </button>
+        </div>
+
+        <!-- Content -->
+        <div class="ad-content">
+
+            <!-- ================= SYMPTOMS ================= -->
+            <div id="symptoms" class="ad-section active">
+                <h2>Symptoms of Alzheimer’s Disease</h2>
+
+                <div class="card-grid">
+
+                    <div class="info-card">
+                        <img src="{{ url_for('static', filename='Upload/memory-loss.png') }}" alt="Memory Loss Symptom - Alzheimer’s Disease">
+                        <h4>Memory Loss</h4>
+                        <p>Forgetting recently learned information and repeating questions frequently.</p>
+                        <span class="stage-badge">Early Stage</span>
+                    </div>
+
+                    <div class="info-card">
+                        <img src="{{ url_for('static', filename='Upload/confusion.png') }}" alt="Confusion and Disorientation Symptom">
+                        <h4>Confusion</h4>
+                        <p>Losing track of dates, seasons and becoming disoriented in familiar places.</p>
+                        <span class="stage-badge">Middle Stage</span>
+                    </div>
+
+                    <div class="info-card">
+                       <img src="{{ url_for('static', filename='Upload/language-problem.png') }}" alt="Language and Speech Difficulty Symptom">
+
+                        <h4>Language Problems</h4>
+                        <p>Difficulty finding correct words while speaking or writing.</p>
+                        <span class="stage-badge">Early Stage</span>
+                    </div>
+
+                    <div class="info-card">
+                        <img src="{{ url_for('static', filename='Upload/mood-swings.png') }}" alt="Mood Swings and Personality Changes">
+
+                        <h4>Mood Changes</h4>
+                        <p>Increased anxiety, irritability and personality changes.</p>
+                        <span class="stage-badge">Advanced Stage</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ================= STAGES ================= -->
+            <div id="stages" class="ad-section">
+                <h2>Stages of Alzheimer’s Disease</h2>
+
+                <div class="card-grid">
+
+                    <div class="info-card">
+                        <img src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?auto=format&fit=crop&w=900&q=80">
+                        <h4>Early Stage</h4>
+                        <p>Mild forgetfulness and difficulty concentrating.</p>
+                        <span class="stage-badge">Stage 1</span>
+                    </div>
+
+                    <div class="info-card">
+                        <img src="https://images.unsplash.com/photo-1584433144859-1fc3ab64a957?auto=format&fit=crop&w=900&q=80">
+                        <h4>Middle Stage</h4>
+                        <p>Increased confusion and trouble recognizing people.</p>
+                        <span class="stage-badge">Stage 2</span>
+                    </div>
+
+                    <div class="info-card">
+                        <img src="https://images.unsplash.com/photo-1584982751601-97dcc096659c?auto=format&fit=crop&w=900&q=80">
+                        <h4>Late Stage</h4>
+                        <p>Severe memory loss and complete dependency on caregivers.</p>
+                        <span class="stage-badge">Stage 3</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ================= CAUSES ================= -->
+            <div id="causes" class="ad-section">
+                <h2>Causes of Alzheimer’s</h2>
+
+                <div class="card-grid">
+
+                    <div class="info-card">
+                        <img src="{{ url_for('static', filename='Upload/amyloid-plaques.png') }}" 
+     alt="Amyloid Plaques in brain neurons related to Alzheimer’s disease">
+
+                        <h4>Amyloid Plaques</h4>
+                        <p>Protein buildup between brain cells disrupting communication.</p>
+                        <span class="stage-badge">Biological Factor</span>
+                    </div>
+
+                    <div class="info-card">
+                        <img src="https://images.unsplash.com/photo-1576089172869-4f5f6f315620?auto=format&fit=crop&w=900&q=80">
+                        <h4>Tau Tangles</h4>
+                        <p>Abnormal protein fibers forming inside neurons.</p>
+                        <span class="stage-badge">Neurological</span>
+                    </div>
+
+                    <div class="info-card">
+                        <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=900&q=80">
+                        <h4>Genetics</h4>
+                        <p>Family history increases likelihood of developing Alzheimer’s.</p>
+                        <span class="stage-badge">Risk Factor</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ================= DIAGNOSIS ================= -->
+            <div id="diagnosis" class="ad-section">
+                <h2>Diagnosis</h2>
+
+                <div class="card-grid">
+
+                    <div class="info-card">
+                        <img src="https://images.pexels.com/photos/8376289/pexels-photo-8376289.jpeg">
+                        <h4>Cognitive Assessment</h4>
+                        <p>Memory and reasoning tests to evaluate thinking skills.</p>
+                        <span class="stage-badge">Clinical Test</span>
+                    </div>
+
+                    <div class="info-card">
+                       <img src="{{ url_for('static', filename='Upload/mri-brain-scan.png') }}" 
+     alt="MRI Brain Scan used for Alzheimer’s Disease diagnosis">
+
+                        <h4>MRI Brain Scan</h4>
+                        <p>Imaging to detect brain shrinkage in key regions.</p>
+                        <span class="stage-badge">Imaging</span>
+                    </div>
+
+                    <div class="info-card">
+                        <img src="https://images.pexels.com/photos/7580259/pexels-photo-7580259.jpeg">
+                        <h4>Neurological Exam</h4>
+                        <p>Assessment of reflexes and coordination.</p>
+                        <span class="stage-badge">Medical Review</span>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ================= PREVENTION ================= -->
+            <div id="prevention" class="ad-section">
+                <h2>Prevention & Risk Reduction</h2>
+
+                <div class="card-grid">
+
+                    <div class="info-card">
+                        <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=900&q=80">
+                        <h4>Exercise</h4>
+                        <p>Regular physical activity improves blood flow to the brain.</p>
+                        <span class="stage-badge">Lifestyle</span>
+                    </div>
+
+                    <div class="info-card">
+                        <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=900&q=80">
+                        <h4>Healthy Diet</h4>
+                        <p>Mediterranean-style diet supports cognitive function.</p>
+                        <span class="stage-badge">Nutrition</span>
+                    </div>
+
+                    <div class="info-card">
+                        <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=900&q=80">
+                        <h4>Mental Activity</h4>
+                        <p>Reading, puzzles and learning reduce risk.</p>
+                        <span class="stage-badge">Brain Health</span>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
     <!-- Hero Section -->
     <section class="hero">
         <div class="container hero-container">
@@ -694,6 +1044,7 @@
         </div>
     </section>
 
+    
     <!-- Project Overview -->
     <section class="overview" id="overview">
         <div class="container">
@@ -1060,7 +1411,22 @@
                     header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.05)';
                 }
             });
+            
         });
+    function showADSection(event, sectionId) {
+
+    const sections = document.querySelectorAll('.ad-section');
+    sections.forEach(section => section.classList.remove('active'));
+
+    const buttons = document.querySelectorAll('.ad-sidebar button');
+    buttons.forEach(btn => btn.classList.remove('active-btn'));
+
+    document.getElementById(sectionId).classList.add('active');
+    event.currentTarget.classList.add('active-btn');
+}
+
+
+
     </script>
 </body>
 </html>

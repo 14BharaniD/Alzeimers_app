@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>Alzheimer's Prediction</title>
 
-<!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -24,13 +23,11 @@ body{
     padding:30px;
 }
 
-/* Container */
 .container{
     max-width:1300px;
     margin:auto;
 }
 
-/* Header */
 .header{
     background: linear-gradient(135deg,#1565c0,#42a5f5);
     color:#fff;
@@ -44,11 +41,6 @@ body{
 
 .header h1{
     font-size:26px;
-    font-weight:600;
-}
-
-.user-info{
-    font-size:15px;
 }
 
 .user-info a{
@@ -58,14 +50,8 @@ body{
     background:rgba(255,255,255,0.25);
     padding:8px 18px;
     border-radius:30px;
-    transition:0.3s;
 }
 
-.user-info a:hover{
-    background:rgba(255,255,255,0.4);
-}
-
-/* Columns */
 .columns{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -73,24 +59,20 @@ body{
     margin-top:35px;
 }
 
-/* Card */
 .card{
-    background:rgba(255,255,255,0.75);
-    backdrop-filter: blur(10px);
+    background:rgba(255,255,255,0.85);
+    backdrop-filter: blur(12px);
     border-radius:16px;
     padding:30px;
     box-shadow:0 15px 35px rgba(0,0,0,0.12);
-    border:1px solid rgba(255,255,255,0.5);
 }
 
 .card h2{
     font-size:22px;
     color:#1565c0;
     margin-bottom:12px;
-    font-weight:600;
 }
 
-/* Badge */
 .badge{
     background:#1565c0;
     color:#fff;
@@ -100,7 +82,6 @@ body{
     margin-left:10px;
 }
 
-/* Inputs */
 textarea,input[type="file"]{
     width:100%;
     padding:14px;
@@ -116,14 +97,6 @@ textarea{
     font-family:monospace;
 }
 
-textarea:focus,
-input:focus{
-    outline:none;
-    border-color:#42a5f5;
-    box-shadow:0 0 8px rgba(66,165,245,0.4);
-}
-
-/* Buttons */
 button{
     width:100%;
     padding:14px;
@@ -132,7 +105,6 @@ button{
     background:linear-gradient(135deg,#43a047,#66bb6a);
     color:#fff;
     font-size:16px;
-    font-weight:500;
     cursor:pointer;
     transition:0.3s;
 }
@@ -142,17 +114,32 @@ button:hover{
     box-shadow:0 8px 20px rgba(0,0,0,0.2);
 }
 
-/* Info box */
-.info{
-    background:#e3f2fd;
-    border-left:5px solid #1e88e5;
-    padding:12px;
-    border-radius:8px;
-    font-size:14px;
-    margin:12px 0;
+/* Interactive Images */
+.analysis-image{
+    margin-top:20px;
+    overflow:hidden;
+    border-radius:15px;
 }
 
-/* Footer */
+.analysis-image img{
+    width:100%;
+    height:240px;
+    object-fit:cover;
+    border-radius:15px;
+    transition:0.4s ease;
+}
+
+.analysis-image img:hover{
+    transform:scale(1.05);
+}
+
+.image-caption{
+    text-align:center;
+    font-size:14px;
+    margin-top:8px;
+    color:#555;
+}
+
 .footer{
     text-align:center;
     margin-top:40px;
@@ -162,20 +149,37 @@ button:hover{
     text-decoration:none;
     color:#1565c0;
     margin:0 20px;
-    font-weight:500;
 }
 
-/* Responsive */
 @media(max-width:900px){
     .columns{
         grid-template-columns:1fr;
     }
-    .header{
-        flex-direction:column;
-        gap:15px;
-        text-align:center;
-    }
 }
+.feature-box{
+    margin-top:20px;
+    background:#f1f8ff;
+    padding:18px;
+    border-radius:12px;
+    border-left:4px solid #1565c0;
+}
+
+.feature-box h4{
+    margin-bottom:10px;
+    color:#1565c0;
+    font-size:16px;
+}
+
+.feature-box ul{
+    padding-left:18px;
+    font-size:14px;
+    line-height:1.6;
+}
+
+.feature-box li{
+    margin-bottom:6px;
+}
+
 </style>
 </head>
 
@@ -183,7 +187,6 @@ button:hover{
 
 <div class="container">
 
-    <!-- Header -->
     <div class="header">
         <h1>Alzheimer’s Detection System</h1>
         <div class="user-info">
@@ -192,7 +195,6 @@ button:hover{
         </div>
     </div>
 
-    <!-- Main Columns -->
     <div class="columns">
 
         <!-- Handwriting -->
@@ -200,28 +202,65 @@ button:hover{
             <h2>Handwriting Analysis <span class="badge">{{ expected }} values</span></h2>
 
             <form action="/predict_tabular" method="POST">
-                <textarea name="features" placeholder="Enter numerical features separated by comma or space..."></textarea>
+                <textarea name="features" placeholder="Enter numerical features separated by comma or space ..."></textarea>
                 <button type="submit">Predict from Handwriting</button>
             </form>
+
+            <!-- Interactive Image -->
+            <div class="analysis-image">
+                <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=1400&q=80"
+     alt="Close-up Writing in Notebook">
+
+
+            </div>
+            <div class="image-caption">
+                AI extracts 450+ motor and spatial features from handwriting patterns.
+            </div>
+            <div class="feature-box">
+    <h4>Extracted Handwriting Features (450+)</h4>
+    <ul>
+        <li><strong>Spatial Features:</strong> Stroke width, height, slant angle, letter spacing</li>
+        <li><strong>Motor Features:</strong> Writing speed, acceleration, pressure dynamics</li>
+        <li><strong>Temporal Features:</strong> Pause duration, stroke timing patterns</li>
+        <li><strong>Tremor Analysis:</strong> Micrographia detection and frequency variation</li>
+        <li><strong>Structural Patterns:</strong> Pen lifts, connectivity and curvature</li>
+    </ul>
+</div>
+
         </div>
 
         <!-- Speech -->
         <div class="card">
-            <h2>Speech Analysis <span class="badge">.wav</span></h2>
-
-            <div class="info">
-                Upload mono WAV audio (16kHz recommended)
-            </div>
+            <h2>Speech Analysis <span class="badge"> mp3 /.wav</span></h2>
 
             <form action="/predict_audio" method="POST" enctype="multipart/form-data">
                 <input type="file" name="audio" accept=".wav" required>
                 <button type="submit">Predict from Speech</button>
             </form>
+
+            <!-- Interactive Image -->
+            <div class="analysis-image">
+                <img src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?auto=format&fit=crop&w=1200&q=80"
+                     alt="Speech Analysis AI">
+            </div>
+            <div class="image-caption">
+                MFCC feature extraction identifies speech pauses and cognitive decline markers.
+            </div>
+            <div class="feature-box">
+    <h4>Extracted Speech Features</h4>
+    <ul>
+        <li><strong>MFCC (40 Coefficients):</strong> Captures vocal tract characteristics</li>
+        <li><strong>Pitch & Intonation:</strong> Voice frequency variation</li>
+        <li><strong>Energy Levels:</strong> Loudness fluctuations</li>
+        <li><strong>Pause Patterns:</strong> Word-finding difficulty indicators</li>
+        <li><strong>Speech Rate:</strong> Articulation speed and fluency</li>
+    </ul>
+</div>
+
         </div>
 
     </div>
 
-    <!-- Footer -->
     <div class="footer">
         <a href="/">Home</a>
         <a href="/about">About</a>
