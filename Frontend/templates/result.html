@@ -483,6 +483,27 @@
     font-size:15px;
 }
 
+.stage-green {
+    border-left: 5px solid #00b09b;
+}
+
+.stage-yellow {
+    border-left: 5px solid #f6ad55;
+}
+
+.stage-orange {
+    border-left: 5px solid #f97316;
+}
+
+.stage-red {
+    border-left: 5px solid #ef4444;
+}
+
+.icon-green { color: #00b09b; }
+.icon-yellow { color: #f6ad55; }
+.icon-orange { color: #f97316; }
+.icon-red { color: #ef4444; }
+
     </style>
 </head>
 <body>
@@ -689,7 +710,23 @@
     ] %}
 {% endif %}
 
-<div class="precaution-card" style="border-left:5px solid {{ stage_color }};">
+{% set stage_class = "stage-green" %}
+{% set icon_class = "icon-green" %}
+
+{% if result.prob_p * 100 >= 40 and result.prob_p * 100 < 60 %}
+    {% set stage_class = "stage-yellow" %}
+    {% set icon_class = "icon-yellow" %}
+{% elif result.prob_p * 100 >= 60 and result.prob_p * 100 < 80 %}
+    {% set stage_class = "stage-orange" %}
+    {% set icon_class = "icon-orange" %}
+{% elif result.prob_p * 100 >= 80 %}
+    {% set stage_class = "stage-red" %}
+    {% set icon_class = "icon-red" %}
+{% endif %}
+
+
+<div class="precaution-card {{ stage_class }}">
+
     
     <div class="precaution-header" onclick="togglePrecautions()">
         <h4>
@@ -703,7 +740,8 @@
         <ul>
             {% for icon, text in precautions %}
             <li>
-                <i class="fas {{ icon }}" style="color: {{ stage_color }};"></i>
+                <div class="precaution-card {{ stage_class }}">
+
                 {{ text }}
             </li>
             {% endfor %}
