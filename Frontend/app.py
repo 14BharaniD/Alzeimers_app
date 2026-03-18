@@ -506,12 +506,6 @@ if __name__ == '__main__':
         print(f"Available templates: {templates}")
     else:
         print(f"❌ WARNING: Templates folder not found at {templates_dir}")
-    
-   if __name__ == '__main__':
+if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
-    app.run(
-        debug=DEBUG_MODE,
-        host='0.0.0.0',
-        port=port,
-        threaded=True
-    )
+    app.run(host="0.0.0.0", port=port)
