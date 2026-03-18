@@ -15,9 +15,16 @@ import traceback
 # ======================
 # Flask App Setup
 # ======================
-app = Flask(__name__)
-app.secret_key = 'your_very_secret_key_change_in_production'
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+app = Flask(
+    __name__,
+    static_folder=os.path.join(BASE_DIR, "Static"),
+    template_folder=os.path.join(BASE_DIR, "templates")
+)
+
+app.secret_key = 'your_very_secret_key_change_in_production'
 # Enable debug to see detailed errors
 DEBUG_MODE = True
 
