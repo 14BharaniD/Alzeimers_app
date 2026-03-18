@@ -29,7 +29,7 @@ app.secret_key = 'your_very_secret_key_change_in_production'
 DEBUG_MODE = True
 
 # Upload folder for temporary audio files
-UPLOAD_FOLDER = 'temp_uploads'
+UPLOAD_FOLDER = os.path.join(BASE_DIR, 'temp_uploads')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -62,8 +62,11 @@ def load_models():
     # Try to load tabular model
     try:
         print("Loading tabular model...")
-        pipe_tabular = joblib.load("alzheimers_random_forest_pipeline.joblib")
-        FEATURE_NAMES = joblib.load("feature_names.joblib")
+        model_path = os.path.join(BASE_DIR, "alzheimers_random_forest_pipeline.joblib")
+        feature_path = os.path.join(BASE_DIR, "feature_names.joblib")
+
+        pipe_tabular = joblib.load(model_path)
+        FEATURE_NAMES = joblib.load(feature_path)
         EXPECTED_FEATURES = len(FEATURE_NAMES)
         print(f"✅ Tabular model loaded successfully. Expected features: {EXPECTED_FEATURES}")
     except Exception as e:
@@ -85,7 +88,8 @@ def load_models():
         # Check if TensorFlow is available
         try:
             from tensorflow.keras.models import load_model
-            model_audio = load_model("alzheimers_speech_model.h5")
+            audio_model_path = os.path.join(BASE_DIR, "alzheimers_speech_model.h5")
+            model_audio = load_model(audio_model_path)
             print("✅ Keras audio model loaded")
         except:
             print("⚠️  Keras model not found or failed to load")
@@ -93,7 +97,8 @@ def load_models():
         
         # Try to load scaler
         try:
-            scaler_audio = joblib.load("scaler.pkl")
+            scaler_path = os.path.join(BASE_DIR, "scaler.pkl")
+            scaler_audio = joblib.load(scaler_path)
             print("✅ Audio scaler loaded")
         except:
             print("⚠️  Scaler not found or failed to load")
@@ -502,9 +507,11 @@ if __name__ == '__main__':
     else:
         print(f"❌ WARNING: Templates folder not found at {templates_dir}")
     
+    if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5000))
     app.run(
         debug=DEBUG_MODE,
-        host='127.0.0.1',
-        port=5000,
+        host='0.0.0.0',
+        port=port,
         threaded=True
     )
