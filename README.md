@@ -15,6 +15,7 @@ This project presents a **Multimodal Deep Learning Framework** that combines:
 
 By integrating both modalities, the system enhances prediction reliability compared to single-mode approaches.
 
+Demo - https://alzeimers-app.onrender.com
 ---
 
 ## 🚀 Key Features
