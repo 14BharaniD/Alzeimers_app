@@ -7,12 +7,12 @@ import sqlite3
 import numpy as np
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
+import os
+os.environ["NUMBA_DISABLE_JIT"] = "1"
 import librosa
 import warnings
 warnings.filterwarnings('ignore')
 import traceback
-import os
-os.environ["NUMBA_DISABLE_JIT"] = "1"
 
 # ======================
 # Flask App Setup
