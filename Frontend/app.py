@@ -11,6 +11,8 @@ import librosa
 import warnings
 warnings.filterwarnings('ignore')
 import traceback
+import os
+os.environ["NUMBA_DISABLE_JIT"] = "1"
 
 # ======================
 # Flask App Setup
@@ -153,7 +155,7 @@ def extract_mfcc(audio_path, n_mfcc=40):
         print(f"File size: {file_size} bytes")
         
         # Try to load audio with librosa
-        y, sr = librosa.load(audio_path, sr=8000, mono=True, duration=5)
+        y, sr = librosa.load(audio_path, sr=8000, mono=True, duration=3, res_type='kaiser_fast')
         print(f"Audio loaded successfully. Duration: {len(y)/sr:.2f} seconds")
         
         # Extract MFCC features
