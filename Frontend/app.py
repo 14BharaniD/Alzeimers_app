@@ -153,7 +153,7 @@ def extract_mfcc(audio_path, n_mfcc=40):
         print(f"File size: {file_size} bytes")
         
         # Try to load audio with librosa
-        y, sr = librosa.load(audio_path, sr=16000, mono=True)
+        y, sr = librosa.load(audio_path, sr=8000, mono=True, duration=5)
         print(f"Audio loaded successfully. Duration: {len(y)/sr:.2f} seconds")
         
         # Extract MFCC features
@@ -312,6 +312,15 @@ def predict_audio_route():
         return redirect(url_for('predict_page'))
     
     file = request.files['audio']
+    # Check file size (max 2MB)
+file.seek(0, os.SEEK_END)
+file_length = file.tell()
+file.seek(0)
+
+if file_length > 2 * 1024 * 1024:
+    flash("Audio file too large (max 2MB)", "error")
+    return redirect(url_for('predict_page')) 
+    
     
     if file.filename == '':
         flash('No audio file selected.', 'error')
